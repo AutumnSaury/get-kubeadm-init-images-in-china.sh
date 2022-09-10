@@ -6,7 +6,7 @@ if [[ $UID -ne 0 ]]; then
 fi
 
 for origin in $(kubeadm config images list); do
-    mirror=$(echo -e $origin | awk '{sub(/k8s\.gcr\.io(\/coredns)?/, "registry.cn-hangzhou.aliyuncs.com/google_containers"); print $0}')
+    mirror=$(echo -e $origin | awk '{sub(/registry\.k8s\.io(\/coredns)?/, "registry.cn-hangzhou.aliyuncs.com/google_containers"); print $0}')
     docker pull $mirror
     docker tag $mirror $origin
     docker rmi $mirror
